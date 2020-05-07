@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title> Flèches </title>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+</head>
+
+<body>
+  <h1>Decideo</h1>
+  <p>Oui ou non ?</p>
+  <button id="choose">Choisir!</button>
+  <p id="choice" style="color: red;"></p>
+</body>
+
+  <script>
+    document.getElementById("choose").addEventListener("click", function() {
+      if (Math.random() > 0.5) {
+        document.getElementById("choice").innerHTML = "Oui"
+      } else {
+        document.getElementById("choice").innerHTML = "Non"
+      }
+    })
+  </script>
+
+</body>
+</html>
