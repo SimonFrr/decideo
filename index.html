@@ -10,31 +10,34 @@
 <body>
   <div class="container" style="max-width: 600px">
     <h1 class="mt-5 mb-5">Decideo</h1>
-    <h4>Quelle est ta question ?</h4>
-    <div class="form-group mb-5">
-      <input class="form-control" id="question"></input>
-    </div>
-    <h4>Et les choix possibles ?</h4>
-    <div class="form-group">
-      <input class="form-control answer"></input>
-    </div>
-    <div class="form-group">
-      <input class="form-control answer"></input>
-    </div>
-    <div class="form-group">
-      <input class="form-control answer"></input>
-    </div>
-    <div class="form-group">
-      <input class="form-control answer"></input>
-    </div>
-    <button id="choose" class="btn btn-primary mt-5">Choisir !</button>
-    <div id="choice" class="alert alert-primary mt-5 d-none" role="alert">
-    </div>
+    <form id="decideo">
+      <h4>Quelle est ta question ?</h4>
+      <div class="form-group mb-5">
+        <input class="form-control" id="question"></input>
+      </div>
+      <h4>Et les choix possibles ?</h4>
+      <div class="form-group">
+        <input class="form-control answer"></input>
+      </div>
+      <div class="form-group">
+        <input class="form-control answer"></input>
+      </div>
+      <div class="form-group">
+        <input class="form-control answer"></input>
+      </div>
+      <div class="form-group">
+        <input class="form-control answer"></input>
+      </div>
+      <input type="submit" class="btn btn-primary mt-5" value="Choisir !"/>
+      <div id="choice" class="alert alert-primary mt-5 d-none" role="alert">
+      </div>
+    </form>
   </div>
 </body>
 
   <script>
-    document.getElementById("choose").addEventListener("click", function () {
+    document.getElementById("decideo").addEventListener("submit", function (event) {
+      event.preventDefault()
       var target = document.getElementById("choice")
       target.classList.add("d-none")
 
@@ -68,6 +71,8 @@
       for (var i = 0 ; i < choices.length ; i++) {
         choices[i].value = ""
       }
+
+      return false
     })
   </script>
 
