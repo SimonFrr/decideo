@@ -3,23 +3,73 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <title> Decideo </title>
-
+  <title> Flèches </title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
-  <h1>Decideo</h1>
-  <p>Oui ou non ?</p>
-  <button id="choose">Choisir!</button>
-  <p id="choice" style="color: red;"></p>
+  <div class="container">
+    <h1>Decideo</h1>
+    <h4>Quelle est ta question ?</h4>
+    <div class="form-group">
+      <input class="form-control" id="question"></input>
+    </div>
+    <h4>Et les choix possibles ?</h4>
+    <div class="form-group">
+      <input class="form-control answer"></input>
+    </div>
+    <div class="form-group">
+      <input class="form-control answer"></input>
+    </div>
+    <div class="form-group">
+      <input class="form-control answer"></input>
+    </div>
+    <div class="form-group">
+      <input class="form-control answer"></input>
+    </div>
+    <div class="form-group">
+      <input class="form-control answer"></input>
+    </div>
+    <button id="choose" class="btn btn-primary">Choisir !</button>
+    <div id="choice" class="alert alert-primary mt-4 d-none" role="alert">
+    </div>
+  </div>
 </body>
 
   <script>
-    document.getElementById("choose").addEventListener("click", function() {
-      if (Math.random() > 0.5) {
-        document.getElementById("choice").innerHTML = "Oui"
-      } else {
-        document.getElementById("choice").innerHTML = "Non"
+    document.getElementById("choose").addEventListener("click", function () {
+      var target = document.getElementById("choice")
+      target.classList.add("d-none")
+
+      var question = document.getElementById("question")
+      if (question.value === "") {
+        target.classList.remove("d-none")
+        target.innerHTML = "Pose une question !"
+        return
+      }
+
+      var choices = document.getElementsByClassName("answer")
+      var realChoices = []
+      for (var i = 0 ; i < choices.length ; i++) {
+        var value = choices[i].value
+        if (value !== "") {
+          realChoices.push(value)
+        }
+      }
+
+      if (realChoices.length === 0) {
+        target.classList.remove("d-none")
+        target.innerHTML = "Propose des réponses !"
+        return
+      }
+
+      target.classList.remove("d-none")
+      var choiceIndex = Math.floor(Math.random() * realChoices.length)
+      target.innerHTML = realChoices[choiceIndex]
+
+      question.value = ""
+      for (var i = 0 ; i < choices.length ; i++) {
+        choices[i].value = ""
       }
     })
   </script>
