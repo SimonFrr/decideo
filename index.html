@@ -28,51 +28,61 @@
       <div class="form-group">
         <input class="form-control answer"></input>
       </div>
-      <input type="submit" class="btn btn-primary mt-5" value="Choisir !"/>
+      <input type="submit" class="btn btn-primary mt-4" value="Choisir !"/>
       <div id="choice" class="alert alert-primary mt-5 d-none" role="alert">
       </div>
     </form>
   </div>
 
   <script>
-    document.getElementById("decideo").addEventListener("submit", function (event) {
-      event.preventDefault()
-      var target = document.getElementById("choice")
-      target.classList.add("d-none")
+    (function () {
+      document.getElementById("decideo").addEventListener("submit", function (event) {
+        event.preventDefault()
+        var target = document.getElementById("choice")
+        target.classList.add("d-none")
 
-      var question = document.getElementById("question")
-      if (question.value === "") {
-        target.classList.remove("d-none")
-        target.innerHTML = "Pose une question !"
-        return
-      }
-
-      var choices = document.getElementsByClassName("answer")
-      var realChoices = []
-      for (var i = 0 ; i < choices.length ; i++) {
-        var value = choices[i].value
-        if (value !== "") {
-          realChoices.push(value)
+        var question = document.getElementById("question")
+        if (question.value === "") {
+          target.classList.remove("d-none")
+          target.innerHTML = "Pose une question !"
+          return
         }
-      }
 
-      if (realChoices.length === 0) {
+        var choices = document.getElementsByClassName("answer")
+        var realChoices = []
+        for (var i = 0 ; i < choices.length ; i++) {
+          var value = choices[i].value
+          if (value !== "") {
+            realChoices.push(value)
+          }
+        }
+
+        if (realChoices.length === 0) {
+          target.classList.remove("d-none")
+          target.innerHTML = "Propose des réponses !"
+          return
+        }
+
         target.classList.remove("d-none")
-        target.innerHTML = "Propose des réponses !"
-        return
-      }
 
-      target.classList.remove("d-none")
-      var choiceIndex = Math.floor(Math.random() * realChoices.length)
-      target.innerHTML = realChoices[choiceIndex]
+        target.innerHTML += "<h4> Ta question : </h4>"
+        target.innerHTML += "<p>" + question.value + "</p>"
+        target.innerHTML += "<p><ul>"
+        realChoices.forEach(function(choice) { target.innerHTML += "<li>" + choice + "</li>" })
+        target.innerHTML += "</ul></p>"
 
-      question.value = ""
-      for (var i = 0 ; i < choices.length ; i++) {
-        choices[i].value = ""
-      }
+        target.innerHTML += "<h4> La décision est prise : </h4>"
+        var choiceIndex = Math.floor(Math.random() * realChoices.length)
+        target.innerHTML += "<p>" + realChoices[choiceIndex] + "</p>"
 
-      return false
-    })
+        question.value = ""
+        for (var i = 0 ; i < choices.length ; i++) {
+          choices[i].value = ""
+        }
+
+        return false
+      })
+    })()
   </script>
 </body>
 </html>
