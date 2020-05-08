@@ -51,6 +51,7 @@
         event.preventDefault()
         var target = document.getElementById("choice")
         target.classList.add("d-none")
+        target.innerHTML = ""
 
         var question = document.getElementById("question")
         if (question.value === "") {
